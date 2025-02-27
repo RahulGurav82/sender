@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Bell, MapPin, XCircle, Navigation, Shield, Truck } from 'lucide-react';
 
 const Dashboard = () => {
     const [status, setStatus] = useState('OFF'); // Track the status (ON/OFF)
@@ -97,24 +98,57 @@ const Dashboard = () => {
         }
     };
 
+    // Function to send emergency alert (placeholder function)
+    const sendEmergencyAlert = () => {
+        alert("Emergency alert feature will be implemented in the next version");
+        // Here you would add the actual implementation to send an emergency alert
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-50 to-green-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-3xl font-bold text-center text-green-900 mb-6">Ambulance Driver Dashboard</h2>
-                <p className="text-center text-gray-700 mb-6">Status: <span className="font-semibold">{status}</span></p>
+                <div className="flex items-center justify-center mb-4">
+                    <Truck className="text-green-600 mr-2" size={32} />
+                    <h2 className="text-3xl font-bold text-green-900">Ambulance Dashboard</h2>
+                </div>
+                
+                <div className="bg-green-50 rounded-lg p-4 mb-6 border border-green-200">
+                    <div className="flex items-center justify-center">
+                        <Shield className="text-green-700 mr-2" size={24} />
+                        <p className="text-xl text-center text-gray-700">
+                            Status: <span className={`font-semibold ${status === 'ON' ? 'text-green-700' : 'text-red-600'}`}>{status}</span>
+                        </p>
+                    </div>
+                </div>
+                
                 <div className="flex flex-col space-y-4">
                     <button
                         onClick={sendLocation}
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                        className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center"
                     >
-                        Send Location
+                        <Navigation className="mr-2" size={20} />
+                        <span className="font-medium">Send Location</span>
                     </button>
+                    
                     <button
                         onClick={stopLocation}
-                        className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
+                        className="w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center"
                     >
-                        Stop Location
+                        <XCircle className="mr-2" size={20} />
+                        <span className="font-medium">Stop Location</span>
                     </button>
+                    
+                    <button
+                        onClick={sendEmergencyAlert}
+                        className="w-full bg-amber-500 text-white py-3 px-4 rounded-lg hover:bg-amber-600 transition duration-300 flex items-center justify-center"
+                    >
+                        <Bell className="mr-2" size={20} />
+                        <span className="font-medium">Emergency Alert</span>
+                    </button>
+                </div>
+                
+                <div className="mt-6 text-center text-gray-500 text-sm">
+                    <p>Location updates help other emergency vehicles track your position</p>
                 </div>
             </div>
         </div>
